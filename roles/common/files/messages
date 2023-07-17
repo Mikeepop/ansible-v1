@@ -1,0 +1,12 @@
+/var/log/messages {
+# The logs will be rotated every week..
+weekly
+# If the log file is missing, go on to the next one without issuing an error message.
+missingok
+# keeping 24 newest logs
+rotate 24
+# compressing old logs
+compress
+# creating a new log file to replace the rotated one
+create
+}

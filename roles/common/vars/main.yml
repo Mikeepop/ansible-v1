@@ -1,0 +1,6 @@
+---
+# Variables file for common role
+
+filepath_sshd_config: /etc/ansible/roles/common/files/sshd_config
+filepath_logrotate: /etc/ansible/roles/common/files/messages
+

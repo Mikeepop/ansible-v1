@@ -1,0 +1,48 @@
+---
+# common related tasks
+
+# - name: Update packages
+#   apt:
+#     upgrade: dist
+#     update_cache: yes
+
+- name: Update all packages to their latest version
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
+
+- name: Upgrade the OS (apt-get dist-upgrade)
+  ansible.builtin.apt:
+    upgrade: dist
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Copy sshd_config file
+  copy:
+    src: "{{ filepath_sshd_config }}"
+    dest: /etc/ssh/sshd_config
+    backup: yes
+
+- name: Restart sshd service
+  service:
+    name: sshd
+    state: restarted
+
+- name: Copy custom logrotate file
+  copy:
+    src: "{{ filepath_logrotate }}"
+    dest: /etc/logrotate.d/
+
+- name: Install packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - wget
+    - unzip
+    - curl
+    - git
+    - jq
+

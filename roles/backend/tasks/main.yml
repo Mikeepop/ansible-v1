@@ -1,0 +1,45 @@
+---
+# backend related tasks
+
+- name: Install apache2
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - apache2
+
+- name: Create folder /tmp/befiles 
+  file:
+    path: /tmp/befiles
+    state: directory
+
+- name: Copy S3 bucket file to the created folder
+  command: aws s3 cp "{{ backend_s3_uri }}" /tmp/befiles
+
+- name: Clean /var/www/html directory
+  file:
+    path: /var/www/html/
+    state: absent
+
+- name: Create /var/www/html directory
+  file:
+    path: /var/www/html/
+    state: directory
+
+- name: Unzip the downloaded backend.zip file
+  unarchive:
+    src: /tmp/befiles/backend.zip
+    dest: /var/www/html
+
+- name: Copy html file to /var/www/html
+  command: sudo cp -p /var/www/html/backend/index.txt /var/www/html/index.html
+
+- name: Change permission
+  command: sudo chmod 666 /var/www/html/index.html
+
+- name: Start apache service
+  service:
+    name: apache2
+    state: started
+    enabled: yes
