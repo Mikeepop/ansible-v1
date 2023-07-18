@@ -2,5 +2,5 @@
 # Variables file for backend role
 
 backend_s3_uri: s3://skillup-s3-bucket-mbragais-001/backend.zip
-dest: /tmp/fefiles
+dest: /tmp/befiles
 s3_object: backend.zip
