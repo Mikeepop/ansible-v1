@@ -1,5 +1,5 @@
 ---
-# backend related tasks
+# tasks file for roles/backend
 
 - name: Install apache2
   apt:
@@ -14,8 +14,19 @@
     path: /tmp/befiles
     state: directory
 
-- name: Copy S3 bucket file to the created folder
-  command: aws s3 cp "{{ backend_s3_uri }}" /tmp/befiles
+- name: Download/get s3 bucket file to the created folder
+  amazon.aws.aws_s3:
+    bucket: skillup-s3-bucket-mbragais-001
+    mode: get
+    object: "{{ s3_object }}"
+    dest: "{{ dest }}/{{ s3_object }}"
+  register: getresult
+
+- debug: msg="{{getresult.msg}}"
+  when: getresult.changed
+
+# - name: Copy S3 bucket file to the created folder
+#   command: aws s3 cp "{{ backend_s3_uri }}" /tmp/befiles
 
 - name: Clean /var/www/html directory
   file:
@@ -33,7 +44,7 @@
     dest: /var/www/html
 
 - name: Copy html file to /var/www/html
-  command: sudo cp -p /var/www/html/backend/index.txt /var/www/html/index.html
+  command: sudo cp -p /var/www/html/backend/index.html /var/www/html/index.html
 
 - name: Change permission
   command: sudo chmod 666 /var/www/html/index.html

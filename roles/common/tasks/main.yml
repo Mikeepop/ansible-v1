@@ -1,10 +1,5 @@
 ---
-# common related tasks
-
-# - name: Update packages
-#   apt:
-#     upgrade: dist
-#     update_cache: yes
+# tasks file for roles/common
 
 - name: Update all packages to their latest version
   ansible.builtin.apt:
@@ -45,4 +40,3 @@
     - curl
     - git
     - jq
-

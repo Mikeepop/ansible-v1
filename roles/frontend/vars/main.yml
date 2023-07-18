@@ -1,4 +1,6 @@
 ---
-# Variables file for frontend role
+# vars file for roles/frontend
 
 frontend_s3_uri: s3://skillup-s3-bucket-mbragais-001/frontend.zip
+dest: /tmp/fefiles
+s3_object: frontend.zip
