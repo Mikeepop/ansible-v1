@@ -30,7 +30,7 @@
 
 
 - name: Copy S3 bucket file to the created folder
- command: aws s3 cp s3://skillup-s3-bucket-mbragais-001/frontend.zip /tmp/fefiles
+  command: aws s3 cp s3://skillup-s3-bucket-mbragais-001/frontend.zip /tmp/fefiles
 
 - name: Clean /var/www/html directory
   file:
