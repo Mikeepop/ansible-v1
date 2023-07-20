@@ -7,8 +7,11 @@ sudo apt-get install -y awscli python3 git cloud-utils ansible python3-boto3 pyt
 
 #download ansible code from git repo
 sudo git clone https://github.com/Mikeepop/ansible-v1.git
-sudo mv -R ansible-v1/* /etc/ansible
+sudo mkdir /etc/ansible
+sudo mv ansible-v1/* /etc/ansible
 rm -rf ansible
+
+sleep 40
 
 #get ansible role using awscli command
 export AWS_DEFAULT_REGION=us-east-2
