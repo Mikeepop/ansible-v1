@@ -1,6 +1,6 @@
 ---
 - import_playbook: /etc/ansible/playbook/common.yml
-  when: ansible_role == "common"
+  when: ansible_role == "bastion"
 
 - import_playbook: /etc/ansible/playbook/frontend.yml
   when: ansible_role == "frontend"
